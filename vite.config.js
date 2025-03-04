@@ -17,7 +17,6 @@ export default defineConfig({
         background_color: "#ffffff",
         display: "standalone",
         start_url: "/",
-        scope: "/",
         icons: [
           {
             src: "/pwa-192x192.png",
@@ -30,7 +29,20 @@ export default defineConfig({
             type: "image/png",
           },
         ],
-      },
+        screenshots: [
+          {
+            src: "/screenshot-desktop.png",
+            sizes: "1280x720",
+            type: "image/png",
+            form_factor: "wide", // Required for desktop install prompt
+          },
+          {
+            src: "/screenshot-mobile.png",
+            sizes: "750x1334",
+            type: "image/png",
+          },
+        ],
+      },      
       workbox: {
         cleanupOutdatedCaches: true,
         globPatterns: ["**/*.{html,js,css,png,ico,svg,webmanifest}"], // ✅ Ensures manifest is included
