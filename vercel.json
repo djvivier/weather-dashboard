@@ -1,0 +1,13 @@
+{
+    "routes": [
+      {
+        "src": "/sw.js",
+        "dest": "/dist/sw.js"
+      },
+      {
+        "src": "/manifest.webmanifest",
+        "dest": "/dist/manifest.webmanifest"
+      }
+    ]
+  }
+  
