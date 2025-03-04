@@ -9,43 +9,56 @@ export default defineConfig({
       registerType: "autoUpdate",
       injectRegister: "auto",
       manifestFilename: "manifest.webmanifest",
-      includeAssets: ["pwa-192x192.png", "pwa-512x512.png"], // ✅ Ensures icons are bundled
+      // Ensure your assets are in the public directory
+      includeAssets: ["favicon.ico"], 
       manifest: {
         name: "Weather Dashboard",
         short_name: "WeatherApp",
         theme_color: "#007BFF",
         background_color: "#ffffff",
-        display: "standalone",
-        start_url: "/",
+        display: "standalone", // This is already correct
+        start_url: "/", // Make sure this matches your application's entry point
+        id: "/", // Adding id field to fix the manifest error
+        purpose: "any", // Adding default purpose
         icons: [
           {
-            src: "/pwa-192x192.png",
+            src: "/icons/pwa-192x192.png", // Updated path
             sizes: "192x192",
             type: "image/png",
+            purpose: "any" // Adding purpose attribute
           },
           {
-            src: "/pwa-512x512.png",
+            src: "/icons/pwa-512x512.png", // Updated path
             sizes: "512x512",
             type: "image/png",
+            purpose: "any" // Adding purpose attribute
           },
+          // Adding a square icon to satisfy OS requirements
+          {
+            src: "/icons/maskable-icon-192x192.png", // New maskable icon
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "maskable" // Special purpose for adaptive icons
+          }
         ],
         screenshots: [
           {
-            src: "/screenshot-desktop.png",
+            src: "/screenshots/screenshot-desktop.png", // Updated path
             sizes: "1280x720",
             type: "image/png",
-            form_factor: "wide", // Required for desktop install prompt
+            form_factor: "wide" // For desktop install prompt
           },
           {
-            src: "/screenshot-mobile.png",
+            src: "/screenshots/screenshot-mobile.png", // Updated path
             sizes: "750x1334",
             type: "image/png",
-          },
-        ],
+            form_factor: "narrow" // For mobile devices
+          }
+        ]
       },      
       workbox: {
         cleanupOutdatedCaches: true,
-        globPatterns: ["**/*.{html,js,css,png,ico,svg,webmanifest}"], // ✅ Ensures manifest is included
+        globPatterns: ["**/*.{html,js,css,png,ico,svg,webmanifest}"],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/api\.openweathermap\.org\//,
